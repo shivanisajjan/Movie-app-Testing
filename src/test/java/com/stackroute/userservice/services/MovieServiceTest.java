@@ -69,12 +69,10 @@ public class MovieServiceTest {
         //Assert.assertEquals(movie,savedMovie);
 
     }
-    @Test(expected = MockitoException.class)
+    @Test(expected = MovieExistsByIdGlobalException.class)
     public void saveMovieTestFailure1() throws MovieExistsByIdGlobalException {
-//        when(movieRepository.findById(eq(15))).thenThrow(MovieExistsByIdGlobalException.class);
-        doThrow(new MovieExistsByIdGlobalException()).when(movieRepository).findById(eq(15));
         Boolean savedMovie = movieService.saveMovie(movie);
-        //Assert.assertEquals(movie,savedMovie);
+        doThrow(new MovieExistsByIdGlobalException()).when(movieRepository).findById(eq(15));
     }
 
     @Test
