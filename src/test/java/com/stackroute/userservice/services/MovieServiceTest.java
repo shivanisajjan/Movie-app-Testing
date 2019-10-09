@@ -124,7 +124,7 @@ public class MovieServiceTest {
     @Test(expected = MovieNotFoundGlobalException.class)
     public void getMovieByTitleTestFailure() throws MovieNotFoundGlobalException {
         when(movieRepository.findBytitle(any())).thenReturn(new ArrayList<>());
-        Boolean deleteMovie = movieService.deleteMovie(15);
+        List<Movie>  getMoive= movieService.getMoviesbyTitle("war");
     }
 
 }
