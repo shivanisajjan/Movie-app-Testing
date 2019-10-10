@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Tasks to be Done Post Demo
 1. Complete all the endpoints for CRUD operations on Muzix
 2. Use h2-console to view in-memory data
@@ -31,4 +32,6 @@ TrackDummyServiceImpl implementation.
 12. Swap in-memory H2 database with MySQL.
 13. Create two additional properties file application-dev.properties that contains configuration for
 H2 and application-prod.properties that contains configurations for MySQL.
+=======
+>>>>>>> 768cc339c83d36bff65fc24071c04af922f9fae8
 Movie app with test cases.
