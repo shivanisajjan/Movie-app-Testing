@@ -20,6 +20,7 @@ public class MovieServiceImpl implements MovieService {
     public MovieServiceImpl(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
+    //Service method to save a movie
     @Override
     public boolean saveMovie(Movie movie) throws MovieExistsByIdGlobalException {
         if(this.movieRepository.existsById(movie.getId())){
@@ -32,11 +33,13 @@ public class MovieServiceImpl implements MovieService {
         return true;
     }
 
+    //service method to get list of movies
     @Override
-    public List<Movie> getallMovies() {
+    public List<Movie> getAllMovies() {
         return this.movieRepository.findAll();
     }
 
+    //service method to update a movie
     @Override
     public boolean update(Movie movie) throws MovieNotFoundGlobalException {
         Movie movie1=this.movieRepository.save(movie);
@@ -46,6 +49,7 @@ public class MovieServiceImpl implements MovieService {
         return true;
     }
 
+    //service method t delete a movie by Id
     @Override
     public boolean deleteMovie(int id) throws MovieNotFoundGlobalException{
         if(this.movieRepository.existsById(id)){
@@ -57,13 +61,13 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
-
+    //service method to get list of movies by title
     @Override
-    public List<Movie> getMoviesbyTitle(String title) throws MovieNotFoundGlobalException{
-        List<Movie> li=this.movieRepository.findBytitle(title);
-        if(li.isEmpty()){
+    public List<Movie> getMoviesByTitle(String title) throws MovieNotFoundGlobalException{
+        List<Movie> movieList=this.movieRepository.findByTitle(title);
+        if(movieList.isEmpty()){
             throw new MovieNotFoundGlobalException();
         }
-        return li;
+        return movieList;
     }
 }

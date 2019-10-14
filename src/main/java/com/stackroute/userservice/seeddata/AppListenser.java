@@ -29,11 +29,13 @@ public class AppListenser implements ApplicationListener<ContextRefreshedEvent> 
     public void setMovieRepository(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
+    //pre filling the data using Application Listenser
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        preFillData();
-    }
-    public void preFillData(){
-        this.movieRepository.save(new Movie(id,title,overview,original_lan));
+        Movie movie= Movie.builder()
+                .id(1)
+                .title("bangalore days").build();
+        this.movieRepository.save(movie);
+//        this.movieRepository.save(new Movie(id,title,overview,original_lan));
     }
 }

@@ -27,7 +27,7 @@ public class MovieRepositoryTest {
         movie = new Movie();
         movie.setId(10);
         movie.setTitle("Manikarnika");
-        movie.setOriginal_language("Hindi");
+        movie.setOriginalLanguage("Hindi");
         movie.setOverview("About Jhansi rani");
 
     }
@@ -105,7 +105,7 @@ public class MovieRepositoryTest {
         List<Movie> m=new ArrayList<>();
         m.add(u);
         m.add(u1);
-        List<Movie> movie=movieRepository.findBytitle("john1");
+        List<Movie> movie=movieRepository.findByTitle("john1");
         Assert.assertEquals(m,movie);
     }
     @Test
@@ -117,7 +117,7 @@ public class MovieRepositoryTest {
         List<Movie> m=new ArrayList<>();
         m.add(u);
         m.add(u1);
-        List<Movie> movie=movieRepository.findBytitle("john1");
+        List<Movie> movie=movieRepository.findByTitle("john1");
         Assert.assertNotEquals(m,movie);
     }
 }

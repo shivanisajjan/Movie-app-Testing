@@ -18,6 +18,8 @@ public class MovieServiceImplDummy implements MovieService {
     public MovieServiceImplDummy(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
+
+    //Service method to save a movie
     @Override
     public boolean saveMovie(Movie movie) throws MovieExistsByIdGlobalException {
         System.out.println("Dummy");
@@ -32,13 +34,15 @@ public class MovieServiceImplDummy implements MovieService {
         return true;
     }
 
+    //service method to get list of movies
     @Override
-    public List<Movie> getallMovies()
+    public List<Movie> getAllMovies()
     {
         System.out.println("Dummy");
         return this.movieRepository.findAll();
     }
 
+    //service method to update a movie
     @Override
     public boolean update(Movie movie) throws MovieNotFoundGlobalException {
         System.out.println("Dummy");
@@ -49,6 +53,7 @@ public class MovieServiceImplDummy implements MovieService {
         return true;
     }
 
+    //service method t delete a movie by Id
     @Override
     public boolean deleteMovie(int id) throws MovieNotFoundGlobalException{
         System.out.println("Dummy");
@@ -61,11 +66,11 @@ public class MovieServiceImplDummy implements MovieService {
         }
     }
 
-
+    //service method to get list of movies by title
     @Override
-    public List<Movie> getMoviesbyTitle(String title) throws MovieNotFoundGlobalException{
+    public List<Movie> getMoviesByTitle(String title) throws MovieNotFoundGlobalException{
         System.out.println("Dummy");
-        List<Movie> li=this.movieRepository.findBytitle(title);
+        List<Movie> li=this.movieRepository.findByTitle(title);
         if(li.isEmpty()){
             throw new MovieNotFoundGlobalException();
         }

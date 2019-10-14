@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Integer> {
+
+    //query for getting list of movie by given title
     @Query(value = "SELECT * FROM Movie m WHERE m.title = :title", nativeQuery=true)
-    List<Movie> findBytitle(@Param("title") String title);
+    List<Movie> findByTitle(@Param("title") String title);
 }

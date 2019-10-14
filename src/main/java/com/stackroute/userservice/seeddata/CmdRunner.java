@@ -5,9 +5,7 @@ import com.stackroute.userservice.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,12 +29,9 @@ public class CmdRunner implements CommandLineRunner {
         this.movieRepository = movieRepository;
     }
 
-    public void preFillData(){
-        this.movieRepository.save(new Movie(id,title,overview,original_lan));
-    }
-
+    //pre filling the data using Command runner
     @Override
     public void run(String... args) throws Exception {
-        preFillData();
+        this.movieRepository.save(new Movie(id,title,overview,original_lan));
     }
 }

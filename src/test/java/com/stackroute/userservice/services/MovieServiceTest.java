@@ -40,7 +40,7 @@ public class MovieServiceTest {
         movie = new Movie();
         movie.setId(15);
         movie.setTitle("War");
-        movie.setOriginal_language("Hindi");
+        movie.setOriginalLanguage("Hindi");
         movie.setOverview("An exhausting film to watch in the best sense, venting our anger at the dehumanizing forces in society until we are left drained.");
         list = new ArrayList();
         list.add(movie);
@@ -79,7 +79,7 @@ public class MovieServiceTest {
         movieRepository.save(movie);
         //stubbing the mock to return specific data
         when(movieRepository.findAll()).thenReturn(list);
-        List<Movie> movielist = movieService.getallMovies();
+        List<Movie> movielist = movieService.getAllMovies();
         Assert.assertEquals(list,movielist);
     }
     @Test
@@ -113,16 +113,16 @@ public class MovieServiceTest {
     }
     @Test
     public void getMovieByTitleTestSuccess() throws MovieNotFoundGlobalException {
-        when(movieRepository.findBytitle(any())).thenReturn(list);
-        List<Movie> getMovie = movieService.getMoviesbyTitle("war");
+        when(movieRepository.findByTitle(any())).thenReturn(list);
+        List<Movie> getMovie = movieService.getMoviesByTitle("war");
         Assert.assertEquals(list,getMovie);
         //verify here verifies that movieRepository save method is only called once
-        verify(movieRepository,times(1)).findBytitle("war");
+        verify(movieRepository,times(1)).findByTitle("war");
     }
     @Test(expected = MovieNotFoundGlobalException.class)
     public void getMovieByTitleTestFailure() throws MovieNotFoundGlobalException {
-        when(movieRepository.findBytitle(any())).thenReturn(new ArrayList<>());
-        List<Movie>  getMoive= movieService.getMoviesbyTitle("war");
+        when(movieRepository.findByTitle(any())).thenReturn(new ArrayList<>());
+        List<Movie>  getMoive= movieService.getMoviesByTitle("war");
     }
 
 }

@@ -50,7 +50,7 @@ public class MovieControllerTest {
         movie = new Movie();
         movie.setId(26);
         movie.setTitle("War");
-        movie.setOriginal_language("Hindi");
+        movie.setOriginalLanguage("Hindi");
         movie.setOverview("An exhausting film to watch in the best sense, venting our anger at the dehumanizing forces in society until we are left drained.");
         list = new ArrayList();
         list.add(movie);
@@ -71,7 +71,7 @@ public class MovieControllerTest {
         when(movieService.saveMovie(any())).thenThrow(MovieExistsByIdGlobalException.class);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/movie")
         .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
-                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andExpect(MockMvcResultMatchers.status().isNotAcceptable())
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -98,7 +98,7 @@ public class MovieControllerTest {
         when(movieService.update(any())).thenThrow(MovieNotFoundGlobalException.class);
         mockMvc.perform(MockMvcRequestBuilders.put("/api/movie")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
-                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andDo(MockMvcResultHandlers.print());
     }
     @Test
@@ -114,23 +114,23 @@ public class MovieControllerTest {
         when(movieService.deleteMovie(anyInt())).thenThrow(MovieNotFoundGlobalException.class);
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/movie/1")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
-                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andDo(MockMvcResultHandlers.print());
     }
     @Test
-    public void getMovieBtTitle() throws Exception {
-        when(movieService.getMoviesbyTitle(anyString())).thenReturn(list);
+    public void getMovieByTitle() throws Exception {
+        when(movieService.getMoviesByTitle(anyString())).thenReturn(list);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/title/war")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
     @Test
-    public void getMovieBtTitleFailure() throws Exception {
-        when(movieService.getMoviesbyTitle(anyString())).thenThrow(MovieNotFoundGlobalException.class);
+    public void getMovieByTitleFailure() throws Exception {
+        when(movieService.getMoviesByTitle(anyString())).thenThrow(MovieNotFoundGlobalException.class);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/title/war")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
-                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andDo(MockMvcResultHandlers.print());
     }
     private static String asJsonString(final Object obj)
